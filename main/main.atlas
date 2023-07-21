@@ -1,12 +1,29 @@
 images {
-  image: "/assets/images/background.png"
+  image: "/assets/characters/survivor1_gun.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/assets/images/logo.png"
+  image: "/assets/characters/survivor1_hold.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/builtins/graphics/particle_blob.png"
+  image: "/assets/characters/survivor1_machine.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/assets/characters/survivor1_reload.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/assets/characters/survivor1_silencer.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/assets/characters/survivor1_stand.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 margin: 0
 extrude_borders: 2
 inner_padding: 0
+max_page_width: 0
+max_page_height: 0
