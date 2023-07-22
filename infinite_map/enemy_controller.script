@@ -31,8 +31,8 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("delete_ghost") then
-		go.delete(sender)
-		self.enemies[sender.path] = nil
+		go.delete(message.id)
+		self.enemies[message.id] = nil
 		spawn_ghost(self)
 	end
 end

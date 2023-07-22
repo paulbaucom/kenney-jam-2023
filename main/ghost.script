@@ -1,4 +1,4 @@
-go.property("vis_distance", 300)
+go.property("vis_distance", 450)
 go.property("move_speed", 200)
 
 local DESPAWN_DIST = 1000
@@ -36,7 +36,7 @@ function anim_attack(self)
 end
 
 function init(self)
-	self.player = msg.url("/infinite_map/player")
+	self.player = msg.url("/infinite_map/player#player")
 	self.controller = msg.url("/infinite_map/enemy_controller#enemy_controller")
 	DESPAWN_DIST = go.get(self.controller, "spawn_radius") / 2 + 225
 
@@ -46,10 +46,12 @@ function init(self)
 end
 
 function update(self, dt)
-	local dist = vmath.length(go.get_world_position() - go.get_world_position(self.player))
+	local pos = go.get_world_position()
+	local player_pos = go.get_world_position(self.player)
+	local dist = vmath.length(pos - player_pos)
 
 	if dist >= DESPAWN_DIST then
-		msg.post(self.controller, "delete_ghost")
+		msg.post(self.controller, "delete_ghost", { id = go.get_id() })
 	elseif dist >= self.vis_distance then
 		if self.state ~= "idle" then
 			msg.post("#sprite", "play_animation", { id = hash("ghost_normal") })
@@ -61,8 +63,9 @@ function update(self, dt)
 		msg.post("#sprite", "play_animation", { id = hash("ghost") })
 		self.state = "attack"
 		anim_attack(self)
-	elseif dist <= 1 then
-		print("player hit")
-		msg.post(self.controller, "delete_ghost")
+
+		if dist <= go.get(self.player, "light_dist") then
+			msg.post(self.player, "ghost_near")
+		end
 	end
 end

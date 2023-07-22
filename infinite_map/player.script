@@ -1,3 +1,6 @@
+go.property("light_dist", 250)
+go.property("light_arc", 70)
+
 local LEFT = hash("left")
 local RIGHT = hash("right")
 local UP = hash("up")
@@ -6,6 +9,8 @@ local DOWN = hash("down")
 function init(self)
 	msg.post(".", "acquire_input_focus")
 	self.actions = {}
+	go.set("light#lightsource", "radius", self.light_dist)
+	go.set("light#lightsource", "arc_angle", self.light_arc)
 end
 
 function update(self, dt)
@@ -22,11 +27,12 @@ function update(self, dt)
 	end
 	go.set_position(pos)
 	go.set_position(-vmath.vector3(pos.x, pos.y, 0) + vmath.vector3(640, 150, 0), "objects")
-	msg.post("@render:", "draw_text", { position = vmath.vector3(20, 20, 0), text = ("PLAYER: %dx%d"):format(pos.x, pos.y) })
+	msg.post("@render:", "draw_text",
+		{ position = vmath.vector3(20, 20, 0), text = ("PLAYER: %dx%d"):format(pos.x, pos.y) })
 	pos = go.get_world_position()
-	local angle = math.atan2(self.look_target.x - pos.x, pos.y - self.look_target.y)
-	go.set_rotation(vmath.quat_rotation_z(angle))
-	go.set_rotation(vmath.quat_rotation_z(angle - math.pi / 2), "light")
+	self.look_angle = math.atan2(self.look_target.x - pos.x, pos.y - self.look_target.y)
+	go.set_rotation(vmath.quat_rotation_z(self.look_angle))
+	go.set_rotation(vmath.quat_rotation_z(self.look_angle - math.pi / 2), "light")
 end
 
 function on_input(self, action_id, action)
@@ -44,4 +50,16 @@ end
 function on_reload(self)
 	-- Add reload-handling code here
 	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("ghost_near") then
+		local ghost_pos = go.get_position(sender)
+		local pos = go.get_position()
+		local angle = math.atan2(ghost_pos.x - pos.x, pos.y - ghost_pos.y)
+		local angle_dif = math.deg(self.look_angle - angle)
+		if angle_dif <= self.light_arc / 2 and angle_dif >= -self.light_arc / 2 then
+			msg.post("/infinite_map/enemy_controller#enemy_controller", "delete_ghost", { id = sender.path })
+		end
+	end
 end
