@@ -3,26 +3,6 @@ images {
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/assets/characters/survivor1_hold.png"
-  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
-}
-images {
-  image: "/assets/characters/survivor1_machine.png"
-  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
-}
-images {
-  image: "/assets/characters/survivor1_reload.png"
-  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
-}
-images {
-  image: "/assets/characters/survivor1_silencer.png"
-  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
-}
-images {
-  image: "/assets/characters/survivor1_stand.png"
-  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
-}
-images {
   image: "/assets/characters/ghost.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
@@ -31,11 +11,11 @@ images {
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/assets/characters/ghost_hit.png"
+  image: "/assets/characters/ghost_normal.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/assets/characters/ghost_normal.png"
+  image: "/assets/characters/ghost_hit.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 margin: 0
