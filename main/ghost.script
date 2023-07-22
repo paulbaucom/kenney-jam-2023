@@ -1,0 +1,24 @@
+function anim_idle(self)
+	local pos = go.get_position()
+	local move_left
+	local move_right
+
+	function move_left(self)
+		sprite.set_hflip("#sprite", false)
+		go.animate(".", "position.x", go.PLAYBACK_ONCE_FORWARD, pos.x - 200, go.EASING_INOUTSINE, 5, 0, move_right)
+	end
+
+	function move_right(self)
+		sprite.set_hflip("#sprite", true)
+		go.animate(".", "position.x", go.PLAYBACK_ONCE_FORWARD, pos.x + 200, go.EASING_INOUTSINE, 5, 0, move_left)
+	end
+
+	move_left(self)
+end
+
+function init(self)
+	local tint = go.get("#sprite", "tint")
+	tint.w = 0.3
+	go.set("#sprite", "tint", tint)
+	anim_idle(self)
+end
