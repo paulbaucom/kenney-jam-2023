@@ -1,3 +1,6 @@
+go.property("vis_distance", 300)
+go.property("move_speed", 200)
+
 function anim_idle(self)
 	local pos = go.get_position()
 	local move_left
@@ -16,9 +19,35 @@ function anim_idle(self)
 	move_left(self)
 end
 
+function anim_attack(self)
+	local current_pos = go.get_position()
+	local target_pos = go.get_position(self.player)
+	local distance = vmath.length(target_pos - current_pos)
+	local duration = distance / self.move_speed
+	go.animate(".", "position", go.PLAYBACK_ONCE_FORWARD, target_pos, go.EASING_LINEAR, duration, 0)
+end
+
 function init(self)
+	self.player = msg.url("/infinite_map/player")
+	self.state = "idle"
+
 	local tint = go.get("#sprite", "tint")
 	tint.w = 0.3
 	go.set("#sprite", "tint", tint)
 	anim_idle(self)
+end
+
+function update(self, dt)
+	if vmath.length(go.get_world_position() - go.get_world_position(self.player)) <= self.vis_distance then
+		msg.post("#sprite", "play_animation", { id = hash("ghost") })
+		self.state = "attack"
+		anim_attack(self)
+	else
+		if self.state ~= "idle" then
+			msg.post("#sprite", "play_animation", { id = hash("ghost_normal") })
+			go.cancel_animations(".")
+			self.state = "idle"
+			anim_idle(self)
+		end
+	end
 end
