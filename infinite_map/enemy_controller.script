@@ -8,7 +8,7 @@ function spawn_ghost(self)
 	pos.y = player_pos.y + math.random(self.spawn_radius) - self.spawn_radius / 2
 	local id = factory.create("#ghostfactory", pos)
 	msg.post(id, "set_parent", { parent_id = go.get_id("objects") })
-	table.insert(self.enemies, id)
+	self.enemies[id] = id
 end
 
 function init(self)
@@ -20,8 +20,19 @@ function init(self)
 end
 
 function update(self, dt)
-	for i,id in pairs(self.enemies) do
+	local i = 1
+	for id, _ in pairs(self.enemies) do
 		local pos = go.get_position(id)
-		msg.post("@render:", "draw_text", { position = vmath.vector3(20, 20 + i * 20, 0), text = ("GHOST: %dx%d"):format(pos.x, pos.y) })		
+		msg.post("@render:", "draw_text",
+			{ position = vmath.vector3(20, 20 + i * 20, 0), text = ("GHOST: %dx%d"):format(pos.x, pos.y) })
+		i = i + 1
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("delete_ghost") then
+		go.delete(sender)
+		self.enemies[sender.path] = nil
+		spawn_ghost(self)
 	end
 end
