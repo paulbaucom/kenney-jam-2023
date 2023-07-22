@@ -46,7 +46,7 @@ components {
 embedded_components {
   id: "sprite"
   type: "sprite"
-  data: "tile_set: \"/infinite_map/images/objects.atlas\"\n"
+  data: "tile_set: \"/main/main.atlas\"\n"
   "default_animation: \"ghost_normal\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "blend_mode: BLEND_MODE_ALPHA\n"
