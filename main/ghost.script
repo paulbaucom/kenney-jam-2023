@@ -25,6 +25,12 @@ function anim_attack(self)
 	local distance = vmath.length(target_pos - current_pos)
 	local duration = distance / self.move_speed
 	go.animate(".", "position", go.PLAYBACK_ONCE_FORWARD, target_pos, go.EASING_LINEAR, duration, 0)
+
+	if target_pos.x - current_pos.x >= 0 then
+		sprite.set_hflip("#sprite", true)
+	else
+		sprite.set_hflip("#sprite", false)
+	end
 end
 
 function init(self)
