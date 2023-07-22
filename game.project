@@ -1,6 +1,5 @@
 [project]
 title = kenny-jam-2023
-dependencies#0 = https://github.com/defold/sample-lights-and-shadows/archive/master.zip
 
 [bootstrap]
 main_collection = /main/main.collectionc
