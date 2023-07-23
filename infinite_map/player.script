@@ -1,5 +1,5 @@
 go.property("light_dist", 250)
-go.property("light_arc", 60)
+go.property("light_arc", 30)
 
 local LEFT = hash("left")
 local RIGHT = hash("right")
@@ -110,7 +110,6 @@ function on_message(self, message_id, message, sender)
 		local angle = math.atan2(ghost_pos.x - pos.x, pos.y - ghost_pos.y)
 		local angle_dif = math.deg(self.look_angle - angle)
 		if angle_dif <= self.light_arc / 2 and angle_dif >= -self.light_arc / 2 then
-			print("kill ghost")
 			msg.post("/infinite_map/enemy_controller#enemy_controller", "kill_ghost", { id = sender.path })
 		end
 	elseif message_id == hash("trigger_response") then
