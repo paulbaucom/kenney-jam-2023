@@ -18,7 +18,7 @@ function spawn_item(self, type)
 	elseif type == "med" then
 		id = factory.create("#fact_med", pos)
 		go.set(msg.url(nil, id, "sprite"), "tint", vmath.vector4(0.3, 0.3, 0.3, 1))
-		go.set(msg.url(nil, id, "light"), "tint", vmath.vector4(0, 0.5, 0.7, 0.5))
+		go.set(msg.url(nil, id, "light"), "tint", vmath.vector4(0, 0.5, 0.8, 0.6))
 		go.set(msg.url(nil, id, "item"), "type", hash("med"))
 	elseif type == "high" then
 		id = factory.create("#fact_high", pos)
