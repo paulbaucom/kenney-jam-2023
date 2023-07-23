@@ -1,7 +1,5 @@
 go.property("type", hash(""))
 
-local DESPAWN_DIST = 1000
-
 function init(self)
 	self.player = msg.url("/infinite_map/player#player")
 	self.controller = msg.url("/infinite_map/item_controller#item_controller")
@@ -16,7 +14,7 @@ function update(self, dt)
 	local player_pos = go.get_world_position(self.player)
 	local dist = vmath.length(pos - player_pos)
 
-	if dist >= DESPAWN_DIST then
+	if dist >= go.get(self.controller, "spawn_radius") then
 		msg.post(self.controller, "delete_item", { id = go.get_id() })
 	end
 end

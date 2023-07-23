@@ -1,8 +1,6 @@
 go.property("vis_distance", 450)
 go.property("move_speed", 200)
 
-local DESPAWN_DIST = 1000
-
 function anim_idle(self)
 	local pos = go.get_position()
 	local move_left
@@ -67,7 +65,7 @@ function update(self, dt)
 	local player_pos = go.get_world_position(self.player)
 	local dist = vmath.length(pos - player_pos)
 
-	if dist >= DESPAWN_DIST then
+	if dist >= go.get(self.controller, "spawn_radius") then
 		msg.post(self.controller, "delete_ghost", { id = go.get_id() })
 	elseif dist >= self.vis_distance then
 		do_idle(self)
