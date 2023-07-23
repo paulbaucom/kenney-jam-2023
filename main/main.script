@@ -8,6 +8,8 @@ local function do_intro(self)
 	go.set("/infinite_map/light#lightsource", "enabled", false)
 	msg.post("/infinite_map/player", "reset_player")
 	msg.post("/gui#hud", "zero_timer")
+	msg.post("/infinite_map/enemy_controller", "clear_ghosts")
+	msg.post("/infinite_map/item_controller", "clear_items")
 end
 
 local function do_start(self)
@@ -16,6 +18,8 @@ local function do_start(self)
 	msg.post("/infinite_map/player", "enable")
 	go.set("/infinite_map/light#lightsource", "enabled", true)
 	msg.post("/gui#hud", "start_timer")
+	msg.post("/infinite_map/enemy_controller", "spawn_ghosts")
+	msg.post("/infinite_map/item_controller", "spawn_items")
 end
 
 local function do_game_over(self)

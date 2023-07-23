@@ -33,18 +33,6 @@ end
 
 function init(self)
 	self.items = {}
-
-	for i = 1, self.low_count do
-		spawn_item(self, "low")
-	end
-
-	for i = 1, self.med_count do
-		spawn_item(self, "med")
-	end
-
-	for i = 1, self.high_count do
-		spawn_item(self, "high")
-	end
 end
 
 function update(self, dt)
@@ -60,11 +48,29 @@ function update(self, dt)
 	end
 end
 
+local function delete_item(self, id)
+	go.delete(id)
+	self.items[id] = nil
+end
+
 function on_message(self, message_id, message, sender)
 	if message_id == hash("delete_item") then
 		local type = self.items[message.id].type
-		go.delete(message.id)
-		self.items[message.id] = nil
+		delete_item(self, message.id)
 		spawn_item(self, type)
+	elseif message_id == hash("spawn_items") then
+		for i = 1, self.low_count do
+			spawn_item(self, "low")
+		end
+		for i = 1, self.med_count do
+			spawn_item(self, "med")
+		end
+		for i = 1, self.high_count do
+			spawn_item(self, "high")
+		end
+	elseif message_id == hash("clear_items") then
+		for id, _ in pairs(self.items) do
+			delete_item(self, id)
+		end
 	end
 end

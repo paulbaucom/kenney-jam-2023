@@ -13,9 +13,6 @@ end
 
 function init(self)
 	self.enemies = {}
-	for i = 1, self.ghost_count do
-		spawn_ghost(self)
-	end
 end
 
 function update(self, dt)
@@ -28,19 +25,29 @@ function update(self, dt)
 	end
 end
 
+local function delete_ghost(self, id)
+	go.delete(id)
+	self.enemies[id] = nil
+end
+
 function on_message(self, message_id, message, sender)
 	if message_id == hash("delete_ghost") then
-		go.delete(message.id)
-		self.enemies[message.id] = nil
+		delete_ghost(self, message.id)
 		spawn_ghost(self)
 	elseif message_id == hash("kill_ghost") then
 		sound.play("#ghost_kill")
-		go.delete(message.id)
-		self.enemies[message.id] = nil
+		delete_ghost(self, message.id)
 		spawn_ghost(self)
 	elseif message_id == hash("hit_ghost") then
-		go.delete(message.id)
-		self.enemies[message.id] = nil
+		delete_ghost(self, message.id)
 		spawn_ghost(self)
+	elseif message_id == hash("spawn_ghosts") then
+		for i = 1, self.ghost_count do
+			spawn_ghost(self)
+		end
+	elseif message_id == hash("clear_ghosts") then
+		for id, _ in pairs(self.enemies) do
+			delete_ghost(self, id)
+		end
 	end
 end
