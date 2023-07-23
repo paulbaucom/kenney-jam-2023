@@ -26,7 +26,7 @@ function update(self, dt)
 		pos.y = pos.y - 500 * dt
 	end
 	go.set_position(pos)
-	go.set_position(-vmath.vector3(pos.x, pos.y, 0) + vmath.vector3(640, 150, 0), "objects")
+	go.set_position(-vmath.vector3(pos.x, pos.y, 0) + vmath.vector3(640, 175, 0), "objects")
 	msg.post("@render:", "draw_text",
 		{ position = vmath.vector3(20, 20, 0), text = ("PLAYER: %dx%d"):format(pos.x, pos.y) })
 	pos = go.get_world_position()
