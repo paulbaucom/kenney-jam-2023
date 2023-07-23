@@ -1,3 +1,5 @@
+go.property("type", hash(""))
+
 local DESPAWN_DIST = 1000
 
 function init(self)
