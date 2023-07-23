@@ -1,7 +1,24 @@
+function convert_time(seconds)
+	local seconds = tonumber(seconds)
+
+	if seconds <= 0 then
+		return "00:00";
+	else
+		mins = string.format("%02.f", math.floor(seconds / 60));
+		secs = string.format("%02.f", math.floor(seconds - mins * 60));
+		return mins .. ":" .. secs
+	end
+end
+
 function init(self)
-	-- Add initialization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	self.time = 0
+	local function start_timer()
+		self.time = self.time + 1
+		gui.set_text(gui.get_node("time"), convert_time(self.time))
+		timer.delay(1, false, start_timer)
+	end
+
+	start_timer()
 end
 
 function final(self)
