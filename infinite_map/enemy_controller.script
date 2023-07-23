@@ -33,5 +33,13 @@ function on_message(self, message_id, message, sender)
 		go.delete(message.id)
 		self.enemies[message.id] = nil
 		spawn_ghost(self)
+	elseif message_id == hash("kill_ghost") then
+		go.delete(message.id)
+		self.enemies[message.id] = nil
+		spawn_ghost(self)
+	elseif message_id == hash("hit_ghost") then
+		go.delete(message.id)
+		self.enemies[message.id] = nil
+		spawn_ghost(self)
 	end
 end
