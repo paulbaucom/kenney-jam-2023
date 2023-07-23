@@ -20,6 +20,15 @@ local function do_start(self)
 	msg.post("/infinite_map/enemy_controller", "spawn_ghosts")
 	msg.post("/infinite_map/item_controller", "spawn_items")
 	--window.set_mouse_lock(true)
+
+	stats = {
+		time = "00:00",
+		ghosts = 0,
+		loot = 0,
+		epic = 0,
+		rare = 0,
+		common = 0
+	}
 end
 
 local function do_game_over(self)

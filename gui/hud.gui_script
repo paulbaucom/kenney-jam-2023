@@ -36,7 +36,8 @@ function on_message(self, message_id, message, sender)
 		local function start_timer()
 			if GAME_STATE == "playing" then
 				self.time = self.time + 1
-				gui.set_text(gui.get_node("time"), convert_time(self.time))
+				stats.time = convert_time(self.time)
+				gui.set_text(gui.get_node("time"), stats.time)
 				timer.delay(1, false, start_timer)
 			end
 		end

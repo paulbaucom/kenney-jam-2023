@@ -12,6 +12,7 @@ local function reset_player(self)
 	self.score = 0
 	msg.post("/gui#hud", "set_score", { score = self.score })
 	self.health = 3
+	msg.post("/gui#hud", "set_health", { health = self.health })
 end
 
 function init(self)
@@ -66,17 +67,22 @@ function pickup_item(self, id)
 		self.score = self.score + 300
 		msg.post("/gui#hud", "set_score", { score = self.score })
 		sound.play("#pickup_low")
+		stats.common = stats.common + 1
 	elseif type == hash("med") then
 		self.score = self.score + 700
 		msg.post("/gui#hud", "set_score", { score = self.score })
 		sound.play("#pickup_med")
+		stats.rare = stats.rare + 1
 	elseif type == hash("high") then
 		self.score = self.score + 3000
 		msg.post("/gui#hud", "set_score", { score = self.score })
 		sound.play("#pickup_high")
+		stats.epic = stats.epic + 1
 	end
 
 	msg.post("/infinite_map/item_controller#item_controller", "delete_item", { id = id })
+
+	stats.loot = stats.loot + 1
 end
 
 function hit_ghost(self, id)

@@ -43,6 +43,7 @@ function on_message(self, message_id, message, sender)
 		sound.play("#ghost_kill")
 		delete_ghost(self, message.id)
 		spawn_ghost(self)
+		stats.ghosts = stats.ghosts + 1
 	elseif message_id == hash("hit_ghost") then
 		delete_ghost(self, message.id)
 		spawn_ghost(self)

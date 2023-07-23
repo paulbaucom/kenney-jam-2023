@@ -9,3 +9,23 @@ function on_input(self, action_id, action)
 		end
 	end
 end
+
+function update(self)
+	gui.set_text(gui.get_node("stats"),
+		stats.time .. "\n" ..
+		stats.ghosts .. "\n" ..
+		stats.loot)
+
+	gui.set_text(gui.get_node("epic_stat"), stats.epic)
+	gui.set_text(gui.get_node("rare_stat"), stats.rare)
+	gui.set_text(gui.get_node("common_stat"), stats.common)
+end
+
+-- function on_message(self, message_id, message, sender)
+-- 	if message.id == hash("show_stats") then
+-- 		gui.set_text(gui.get_node("stats"),
+-- 			stats.time .. "\n" ..
+-- 			stats.ghosts .. "\n" ..
+-- 			stats.loot)
+-- 	end
+-- end
