@@ -63,15 +63,15 @@ function pickup_item(self, id)
 	local type = go.get(item, "type")
 
 	if type == hash("low") then
-		self.score = self.score + 50
+		self.score = self.score + 300
 		msg.post("/gui#hud", "set_score", { score = self.score })
 		sound.play("#pickup_low")
 	elseif type == hash("med") then
-		self.score = self.score + 100
+		self.score = self.score + 700
 		msg.post("/gui#hud", "set_score", { score = self.score })
 		sound.play("#pickup_med")
 	elseif type == hash("high") then
-		self.score = self.score + 1000
+		self.score = self.score + 3000
 		msg.post("/gui#hud", "set_score", { score = self.score })
 		sound.play("#pickup_high")
 	end
