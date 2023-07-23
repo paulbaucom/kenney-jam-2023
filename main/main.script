@@ -1,5 +1,3 @@
-GAME_STATE = "intro"
-
 local function do_intro(self)
 	GAME_STATE = "intro"
 	msg.post("/gui#game_over", "disable")
@@ -10,7 +8,7 @@ local function do_intro(self)
 	msg.post("/gui#hud", "zero_timer")
 	msg.post("/infinite_map/enemy_controller", "clear_ghosts")
 	msg.post("/infinite_map/item_controller", "clear_items")
-	window.set_mouse_lock(false)
+	--window.set_mouse_lock(false)
 end
 
 local function do_start(self)
@@ -21,7 +19,7 @@ local function do_start(self)
 	msg.post("/gui#hud", "start_timer")
 	msg.post("/infinite_map/enemy_controller", "spawn_ghosts")
 	msg.post("/infinite_map/item_controller", "spawn_items")
-	window.set_mouse_lock(true)
+	--window.set_mouse_lock(true)
 end
 
 local function do_game_over(self)
@@ -29,7 +27,7 @@ local function do_game_over(self)
 	msg.post("/gui#game_over", "enable")
 	msg.post("/infinite_map/player", "disable")
 	go.set("/infinite_map/light#lightsource", "enabled", false)
-	window.set_mouse_lock(false)
+	--window.set_mouse_lock(false)
 end
 
 function init(self)
@@ -39,15 +37,15 @@ function init(self)
 	do_intro(self)
 end
 
-function on_input(self, action_id, action)
-	if action_id == hash("esc") then
-		window.set_mouse_lock(false)
-	elseif action_id == hash("touch") then
-		if not window.get_mouse_lock() and GAME_STATE == "playing" then
-			window.set_mouse_lock(true)
-		end
-	end
-end
+-- function on_input(self, action_id, action)
+-- 	if action_id == hash("esc") then
+-- 		window.set_mouse_lock(false)
+-- 	elseif action_id == hash("touch") then
+-- 		if not window.get_mouse_lock() and GAME_STATE == "playing" then
+-- 			window.set_mouse_lock(true)
+-- 		end
+-- 	end
+-- end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("start_game") then
