@@ -39,8 +39,8 @@ function update(self, dt)
 	end
 	go.set_position(pos)
 	go.set_position(-vmath.vector3(pos.x, pos.y, 0) + vmath.vector3(640, 200, 0), "objects")
-	msg.post("@render:", "draw_text",
-		{ position = vmath.vector3(20, 20, 0), text = ("PLAYER: %dx%d"):format(pos.x, pos.y) })
+	-- msg.post("@render:", "draw_text",
+	-- 	{ position = vmath.vector3(20, 20, 0), text = ("PLAYER: %dx%d"):format(pos.x, pos.y) })
 	pos = go.get_world_position()
 	self.look_angle = math.atan2(self.look_target.x - pos.x, pos.y - self.look_target.y)
 	go.set_rotation(vmath.quat_rotation_z(self.look_angle))

@@ -39,18 +39,18 @@ function init(self)
 	self.items = {}
 end
 
-function update(self, dt)
-	local i = 1
-	for id, item in pairs(self.items) do
-		local pos = go.get_position(id)
-		msg.post("@render:", "draw_text",
-			{
-				position = vmath.vector3(200, i * 20, 0),
-				text = "ITEM " .. item.type .. " " .. ("%dx%d"):format(pos.x, pos.y)
-			})
-		i = i + 1
-	end
-end
+-- function update(self, dt)
+-- 	local i = 1
+-- 	for id, item in pairs(self.items) do
+-- 		local pos = go.get_position(id)
+-- 		msg.post("@render:", "draw_text",
+-- 			{
+-- 				position = vmath.vector3(200, i * 20, 0),
+-- 				text = "ITEM " .. item.type .. " " .. ("%dx%d"):format(pos.x, pos.y)
+-- 			})
+-- 		i = i + 1
+-- 	end
+-- end
 
 local function delete_item(self, id)
 	go.delete(id)

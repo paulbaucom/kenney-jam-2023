@@ -20,15 +20,15 @@ function init(self)
 	self.enemies = {}
 end
 
-function update(self, dt)
-	local i = 1
-	for id, _ in pairs(self.enemies) do
-		local pos = go.get_position(id)
-		msg.post("@render:", "draw_text",
-			{ position = vmath.vector3(20, 20 + i * 20, 0), text = ("GHOST: %dx%d"):format(pos.x, pos.y) })
-		i = i + 1
-	end
-end
+-- function update(self, dt)
+-- 	local i = 1
+-- 	for id, _ in pairs(self.enemies) do
+-- 		local pos = go.get_position(id)
+-- 		msg.post("@render:", "draw_text",
+-- 			{ position = vmath.vector3(20, 20 + i * 20, 0), text = ("GHOST: %dx%d"):format(pos.x, pos.y) })
+-- 		i = i + 1
+-- 	end
+-- end
 
 local function delete_ghost(self, id)
 	go.delete(id)
