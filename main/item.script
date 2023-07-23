@@ -8,7 +8,7 @@ function init(self)
 	DESPAWN_DIST = go.get(self.controller, "spawn_radius") / 2 + 225
 
 	go.set("#sprite", "cursor", math.random())
-	go.animate("#light", "scale", go.PLAYBACK_LOOP_PINGPONG, 1.7, go.EASING_INOUTSINE, 4, 0)
+	go.animate("#light", "scale", go.PLAYBACK_LOOP_PINGPONG, 1.8, go.EASING_INOUTSINE, 4, 0)
 end
 
 function update(self, dt)
