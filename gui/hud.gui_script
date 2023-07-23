@@ -34,10 +34,9 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-    if message_id == hash("set_score") then
-        local s = gui.get_node("score")
-        gui.set_text(s, message.score)
-    end
+	if message_id == hash("set_score") then
+		gui.set_text(gui.get_node("score"), message.score)
+	end
 end
 
 function on_input(self, action_id, action)
