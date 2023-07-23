@@ -1,0 +1,67 @@
+go.property("spawn_radius", 3000)
+go.property("high_count", 3)
+go.property("med_count", 7)
+go.property("low_count", 9)
+
+function spawn_item(self, type)
+	local player_pos = go.get_world_position("player")
+	local pos = vmath.vector3(0, 0, 0.4)
+	pos.x = player_pos.x + math.random(self.spawn_radius) - self.spawn_radius / 2
+	pos.y = player_pos.y + math.random(self.spawn_radius) - self.spawn_radius / 2
+
+	local id
+	if type == "low" then
+		id = factory.create("#fact_low", pos)
+		go.set(msg.url(nil, id, "sprite"), "tint", vmath.vector4(0.3, 0.3, 0.3, 1))
+		go.set(msg.url(nil, id, "light"), "tint", vmath.vector4(0, 0.5, 0, 0.5))
+	elseif type == "med" then
+		id = factory.create("#fact_med", pos)
+		go.set(msg.url(nil, id, "sprite"), "tint", vmath.vector4(0.3, 0.3, 0.3, 1))
+		go.set(msg.url(nil, id, "light"), "tint", vmath.vector4(0, 0.3, 0.7, 0.5))
+	elseif type == "high" then
+		id = factory.create("#fact_high", pos)
+		go.set(msg.url(nil, id, "sprite"), "tint", vmath.vector4(0.3, 0.3, 0.3, 1))
+		go.set(msg.url(nil, id, "light"), "tint", vmath.vector4(0.7, 0.6, 0, 0.5))
+	end
+
+	msg.post(id, "set_parent", { parent_id = go.get_id("objects") })
+	self.items[id] = { type = type }
+end
+
+function init(self)
+	self.items = {}
+
+	for i = 1, self.low_count do
+		spawn_item(self, "low")
+	end
+
+	for i = 1, self.med_count do
+		spawn_item(self, "med")
+	end
+
+	for i = 1, self.high_count do
+		spawn_item(self, "high")
+	end
+end
+
+function update(self, dt)
+	local i = 1
+	for id, item in pairs(self.items) do
+		local pos = go.get_position(id)
+		msg.post("@render:", "draw_text",
+			{
+				position = vmath.vector3(200, i * 20, 0),
+				text = "ITEM " .. item.type .. " " .. ("%dx%d"):format(pos.x, pos.y)
+			})
+		i = i + 1
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("delete_item") then
+		local type = self.items[message.id].type
+		go.delete(message.id)
+		self.items[message.id] = nil
+		spawn_item(self, type)
+	end
+end
