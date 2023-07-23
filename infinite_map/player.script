@@ -1,19 +1,35 @@
 go.property("light_dist", 250)
-go.property("light_arc", 70)
+go.property("light_arc", 60)
 
 local LEFT = hash("left")
 local RIGHT = hash("right")
 local UP = hash("up")
 local DOWN = hash("down")
 
+local function reset_player(self)
+	go.set("light#lightsource", "radius", self.light_dist)
+	go.set("light#lightsource", "arc_angle", self.light_arc)
+	self.score = 0
+	msg.post("/gui#hud", "set_score", { score = self.score })
+	self.health = 3
+end
+
 function init(self)
 	msg.post(".", "acquire_input_focus")
 	self.actions = {}
-	go.set("light#lightsource", "radius", self.light_dist)
-	go.set("light#lightsource", "arc_angle", self.light_arc)
+	-- go.set("light#lightsource", "radius", self.light_dist)
+	-- go.set("light#lightsource", "arc_angle", self.light_arc)
+	-- self.score = 0
+	-- msg.post("/gui#hud", "set_score", { score = self.score })
+	-- self.health = 3
+	reset_player(self)
 end
 
 function update(self, dt)
+	if GAME_STATE ~= "playing" then
+		return
+	end
+
 	local pos = go.get_position()
 	if self.actions[LEFT] then
 		pos.x = pos.x - 500 * dt
@@ -26,7 +42,7 @@ function update(self, dt)
 		pos.y = pos.y - 500 * dt
 	end
 	go.set_position(pos)
-	go.set_position(-vmath.vector3(pos.x, pos.y, 0) + vmath.vector3(640, 175, 0), "objects")
+	go.set_position(-vmath.vector3(pos.x, pos.y, 0) + vmath.vector3(640, 200, 0), "objects")
 	msg.post("@render:", "draw_text",
 		{ position = vmath.vector3(20, 20, 0), text = ("PLAYER: %dx%d"):format(pos.x, pos.y) })
 	pos = go.get_world_position()
@@ -52,6 +68,41 @@ function on_reload(self)
 	-- Remove this function if not needed
 end
 
+function pickup_item(self, id)
+	local item = msg.url(nil, id, "item")
+	local type = go.get(item, "type")
+
+	if type == hash("low") then
+		self.score = self.score + 50
+		msg.post("/gui#hud", "set_score", { score = self.score })
+		sound.play("#pickup_low")
+	elseif type == hash("med") then
+		self.score = self.score + 100
+		msg.post("/gui#hud", "set_score", { score = self.score })
+		sound.play("#pickup_med")
+	elseif type == hash("high") then
+		self.score = self.score + 1000
+		msg.post("/gui#hud", "set_score", { score = self.score })
+		sound.play("#pickup_high")
+	end
+
+	msg.post("/infinite_map/item_controller#item_controller", "delete_item", { id = id })
+end
+
+function hit_ghost(self, id)
+	self.health = self.health - 1
+	msg.post("/gui#hud", "set_health", { health = self.health })
+
+	if self.health == 0 then
+		sound.play("#die")
+		msg.post("/main#main", "game_over")
+	else
+		sound.play("#hurt")
+	end
+
+	msg.post("/infinite_map/enemy_controller#enemy_controller", "hit_ghost", { id = id })
+end
+
 function on_message(self, message_id, message, sender)
 	if message_id == hash("ghost_near") then
 		local ghost_pos = go.get_position(sender)
@@ -59,7 +110,16 @@ function on_message(self, message_id, message, sender)
 		local angle = math.atan2(ghost_pos.x - pos.x, pos.y - ghost_pos.y)
 		local angle_dif = math.deg(self.look_angle - angle)
 		if angle_dif <= self.light_arc / 2 and angle_dif >= -self.light_arc / 2 then
-			msg.post("/infinite_map/enemy_controller#enemy_controller", "delete_ghost", { id = sender.path })
+			print("kill ghost")
+			msg.post("/infinite_map/enemy_controller#enemy_controller", "kill_ghost", { id = sender.path })
 		end
+	elseif message_id == hash("trigger_response") then
+		if message.group == hash("items") then
+			pickup_item(self, message.other_id)
+		elseif message.group == hash("ghosts") then
+			hit_ghost(self, message.other_id)
+		end
+	elseif message_id == hash("reset_player") then
+		reset_player(self)
 	end
 end

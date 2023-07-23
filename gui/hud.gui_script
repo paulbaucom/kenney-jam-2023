@@ -10,19 +10,39 @@ function convert_time(seconds)
 	end
 end
 
-function init(self)
-	self.time = 0
-	local function start_timer()
-		self.time = self.time + 1
-		gui.set_text(gui.get_node("time"), convert_time(self.time))
-		timer.delay(1, false, start_timer)
-	end
-
-	start_timer()
-end
-
 function on_message(self, message_id, message, sender)
 	if message_id == hash("set_score") then
 		gui.set_text(gui.get_node("score"), message.score)
+	elseif message_id == hash("set_health") then
+		if message.health == 3 then
+			gui.set_enabled(gui.get_node("heart3"), true)
+			gui.set_enabled(gui.get_node("heart2"), true)
+			gui.set_enabled(gui.get_node("heart1"), true)
+		elseif message.health == 2 then
+			gui.set_enabled(gui.get_node("heart3"), false)
+			gui.set_enabled(gui.get_node("heart2"), true)
+			gui.set_enabled(gui.get_node("heart1"), true)
+		elseif message.health == 1 then
+			gui.set_enabled(gui.get_node("heart3"), false)
+			gui.set_enabled(gui.get_node("heart2"), false)
+			gui.set_enabled(gui.get_node("heart1"), true)
+		elseif message.health == 0 then
+			gui.set_enabled(gui.get_node("heart3"), false)
+			gui.set_enabled(gui.get_node("heart2"), false)
+			gui.set_enabled(gui.get_node("heart1"), false)
+		end
+	elseif message_id == hash("start_timer") then
+		self.time = -1
+		local function start_timer()
+			if GAME_STATE == "playing" then
+				self.time = self.time + 1
+				gui.set_text(gui.get_node("time"), convert_time(self.time))
+				timer.delay(1, false, start_timer)
+			end
+		end
+		start_timer()
+	elseif message_id == hash("zero_timer") then
+		self.time = 0
+		gui.set_text(gui.get_node("time"), convert_time(self.time))
 	end
 end
