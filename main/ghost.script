@@ -70,12 +70,6 @@ function update(self, dt)
 	if dist >= DESPAWN_DIST then
 		msg.post(self.controller, "delete_ghost", { id = go.get_id() })
 	elseif dist >= self.vis_distance then
-		-- if self.state ~= "idle" then
-		-- 	msg.post("#sprite", "play_animation", { id = hash("ghost_normal") })
-		-- 	go.cancel_animations(".")
-		-- 	self.state = "idle"
-		-- 	anim_idle(self)
-		-- end
 		do_idle(self)
 	elseif dist <= self.vis_distance then
 		if self.state ~= "attack" then
