@@ -60,6 +60,9 @@ function update(self, dt)
 			anim_idle(self)
 		end
 	elseif dist <= self.vis_distance then
+		if self.state ~= "attack" then
+			sound.play("#alert")
+		end
 		msg.post("#sprite", "play_animation", { id = hash("ghost") })
 		self.state = "attack"
 		anim_attack(self)

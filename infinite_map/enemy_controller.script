@@ -34,6 +34,7 @@ function on_message(self, message_id, message, sender)
 		self.enemies[message.id] = nil
 		spawn_ghost(self)
 	elseif message_id == hash("kill_ghost") then
+		sound.play("#ghost_kill")
 		go.delete(message.id)
 		self.enemies[message.id] = nil
 		spawn_ghost(self)
