@@ -60,11 +60,11 @@ animations {
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
   }
   images {
-    image: "/assets/item_images/genericItem_color_084.png"
+    image: "/assets/item_images/genericItem_color_074.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
   }
   images {
-    image: "/assets/item_images/genericItem_color_074.png"
+    image: "/assets/item_images/genericItem_color_076.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
   }
   playback: PLAYBACK_LOOP_FORWARD
