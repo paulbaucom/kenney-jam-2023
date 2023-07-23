@@ -19,7 +19,7 @@ background_color {
 }
 nodes {
   position {
-    x: 1262.636
+    x: 1260.0
     y: 700.0
     z: 0.0
     w: 1.0
@@ -85,7 +85,7 @@ nodes {
 }
 nodes {
   position {
-    x: 45.0
+    x: 20.0
     y: 700.0
     z: 0.0
     w: 1.0
@@ -120,7 +120,7 @@ nodes {
   id: "heart1"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
-  pivot: PIVOT_N
+  pivot: PIVOT_NW
   adjust_mode: ADJUST_MODE_FIT
   layer: ""
   inherit_alpha: true
@@ -143,7 +143,7 @@ nodes {
 }
 nodes {
   position {
-    x: 95.0
+    x: 65.0
     y: 700.0
     z: 0.0
     w: 1.0
@@ -178,7 +178,7 @@ nodes {
   id: "heart2"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
-  pivot: PIVOT_N
+  pivot: PIVOT_NW
   adjust_mode: ADJUST_MODE_FIT
   layer: ""
   inherit_alpha: true
@@ -201,7 +201,7 @@ nodes {
 }
 nodes {
   position {
-    x: 145.0
+    x: 110.0
     y: 700.0
     z: 0.0
     w: 1.0
@@ -236,7 +236,7 @@ nodes {
   id: "heart3"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
-  pivot: PIVOT_N
+  pivot: PIVOT_NW
   adjust_mode: ADJUST_MODE_FIT
   layer: ""
   inherit_alpha: true
