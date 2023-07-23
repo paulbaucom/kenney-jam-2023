@@ -32,14 +32,14 @@ function update(self, dt)
 
 	local pos = go.get_position()
 	if self.actions[LEFT] then
-		pos.x = pos.x - 500 * dt
+		pos.x = pos.x - 400 * dt
 	elseif self.actions[RIGHT] then
-		pos.x = pos.x + 500 * dt
+		pos.x = pos.x + 400 * dt
 	end
 	if self.actions[UP] then
-		pos.y = pos.y + 500 * dt
+		pos.y = pos.y + 400 * dt
 	elseif self.actions[DOWN] then
-		pos.y = pos.y - 500 * dt
+		pos.y = pos.y - 400 * dt
 	end
 	go.set_position(pos)
 	go.set_position(-vmath.vector3(pos.x, pos.y, 0) + vmath.vector3(640, 200, 0), "objects")
