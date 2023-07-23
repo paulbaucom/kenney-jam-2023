@@ -12,7 +12,6 @@ function spawn_ghost(self)
 end
 
 function init(self)
-	math.randomseed(os.time())
 	self.enemies = {}
 	for i = 1, self.ghost_count do
 		spawn_ghost(self)
