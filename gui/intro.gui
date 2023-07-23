@@ -212,7 +212,7 @@ nodes {
 nodes {
   position {
     x: 640.0
-    y: 364.014
+    y: 376.028
     z: 0.0
     w: 1.0
   }
@@ -242,7 +242,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "Move with WASD keys | Shine light with mouse"
+  text: "Move with WASD keys | Shine LIGHT with mouse"
   font: "text"
   id: "instruct2"
   xanchor: XANCHOR_NONE
