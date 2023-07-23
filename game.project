@@ -1,5 +1,6 @@
 [project]
-title = kenny-jam-2023
+title = Ghosts and Loot
+developer = Paul Baucom
 
 [bootstrap]
 main_collection = /main/main.collectionc
@@ -37,6 +38,6 @@ clear_color_blue = 0.1
 clear_color_alpha = 1.0
 
 [graphics]
-default_texture_mag_filter = nearest
-default_texture_min_filter = nearest
+default_texture_mag_filter = linear
+default_texture_min_filter = linear
 
