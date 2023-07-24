@@ -15,4 +15,6 @@ Uses code adapted from these examples/projects:
 
 Art assets and some sound effects used from Kenney's collection:  https://kenney.nl/
 
+Font used:  https://www.fontspace.com/london-presley-font-f92100
+
 ---
