@@ -1,19 +1,18 @@
-# Welcome to Defold
+## Ghosts and Loot
 
-This project was created from the "desktop" project template. This means that the settings in ["game.project"](defold://open?path=/game.project) have been changed to be suitable for a desktop game:
+This is my submission to the [Kenney Jam 2023](https://itch.io/jam/kenney-jam-2023) game jam.  The rules limited the art assets to those made by [Kenney](https://www.kenney.nl/).
 
-- The screen size is set to 1280x720
-- Projection is set to Fixed Fit
-- macOS and Windows icons are set
-- Mouse clicks are bound to action "touch"
-- A simple script in a game object is set up to receive and react to input
+<iframe frameborder="0" src="https://itch.io/embed/2184023" width="552" height="167"><a href="https://pabaucom.itch.io/ghosts-and-loot">Ghosts and Loot by pabaucom</a></iframe>
 
-[Build and run](defold://build) to see it in action. You can of course alter these settings to fit your needs.
+---
 
-Check out [the documentation pages](https://defold.com/learn) for examples, tutorials, manuals and API docs.
+The idea grew organically while trying to prototype something that fit the theme.  I had hoped to make the flashlight dim over time so the player had to collect batteries.  I also wanted to do health pickups, random building spawns, and loot chests.  I ran out of time for all of this, but am satisfied with the state it was submitted in.
 
-If you run into trouble, help is available in [our forum](https://forum.defold.com).
+Uses code adapted from these examples/projects:
 
-Happy Defolding!
+* https://github.com/britzl/publicexamples/tree/master/examples/infinite_map
+* https://github.com/defold/sample-lights-and-shadows
+
+Art assets and some sound effects used from Kenney's collection:  https://kenney.nl/
 
 ---
