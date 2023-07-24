@@ -2,7 +2,7 @@
 
 This is my submission to the [Kenney Jam 2023](https://itch.io/jam/kenney-jam-2023) game jam.  The rules limited the art assets to those made by [Kenney](https://www.kenney.nl/).
 
-<iframe frameborder="0" src="https://itch.io/embed/2184023" width="552" height="167"><a href="https://pabaucom.itch.io/ghosts-and-loot">Ghosts and Loot by pabaucom</a></iframe>
+#### [Play on itch.io](https://pabaucom.itch.io/ghosts-and-loot)
 
 ---
 
